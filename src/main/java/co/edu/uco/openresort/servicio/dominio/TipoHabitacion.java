@@ -1,8 +1,9 @@
-package co.edu.uco.openresort.dominio;
+package co.edu.uco.openresort.servicio.dominio;
 
 import java.math.BigDecimal;
 
 public class TipoHabitacion {
+
     private int id;
     private String nombre;
     private String descripcion;
