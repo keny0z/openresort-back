@@ -3,10 +3,7 @@ package co.edu.uco.openresort.entidad;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -15,6 +12,7 @@ import java.math.BigDecimal;
 @Table(name = "tipo_habitacion")
 public class TipoHabitacionEntidad {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private String descripcion;

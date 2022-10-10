@@ -1,4 +1,4 @@
-package co.edu.uco.openresort.servicio.dominio;
+package co.edu.uco.openresort.dominio;
 
 public class Habitacion {
 
