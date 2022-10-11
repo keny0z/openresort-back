@@ -10,18 +10,6 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/hotel")
 public class HotelControlador {
-   /* @Autowired
-    HotelServicio hotelServicio;
-
-    @GetMapping()
-    public ArrayList<HotelEntidad> consultar(){
-        return hotelServicio.consultar();
-    }
-
-    @PostMapping()
-    public HotelEntidad registrar(@RequestBody HotelEntidad hotelEntidad){
-        return hotelServicio.registrar(hotelEntidad);
-    }*/
 
     @Autowired
     private HotelFachada hotelFachada;
@@ -35,4 +23,10 @@ public class HotelControlador {
     public HotelDTO registrar(@RequestBody HotelDTO hotelDTO){
         return hotelFachada.registrar(hotelDTO);
     }
+
+    @DeleteMapping(path = "{id}")
+    public void eliminar(@PathVariable("id") int id){
+        hotelFachada.eliminar(id);
+    }
+
 }

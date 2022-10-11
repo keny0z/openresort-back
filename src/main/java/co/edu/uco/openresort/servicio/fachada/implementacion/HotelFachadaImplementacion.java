@@ -32,7 +32,7 @@ public class HotelFachadaImplementacion implements HotelFachada {
     }
 
     @Override
-    public void eliminar(HotelDTO hotelDTO) {
-
+    public void eliminar(int id) {
+        hotelServicio.eliminar(id);
     }
 }

@@ -34,8 +34,8 @@ public class HotelServicioImplementacion implements co.edu.uco.openresort.servic
     }
 
     @Override
-    public void eliminar(HotelDominio hotelDominio) {
-
+    public void eliminar(int id) {
+        hotelRepositorio.deleteById(id);
     }
 
 
