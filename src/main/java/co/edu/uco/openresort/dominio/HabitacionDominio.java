@@ -1,10 +1,10 @@
 package co.edu.uco.openresort.dominio;
 
-public class Habitacion {
+public class HabitacionDominio {
 
     private int id;
-    private Hotel hotel;
-    private TipoHabitacion tipo;
+    private HotelDominio hotel;
+    private TipoHabitacionDominio tipo;
     private String numero;
     private boolean disponible;
 }

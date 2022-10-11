@@ -2,7 +2,7 @@ package co.edu.uco.openresort.dominio;
 
 import java.math.BigDecimal;
 
-public class TipoHabitacion {
+public class TipoHabitacionDominio {
 
     private int id;
     private String nombre;
