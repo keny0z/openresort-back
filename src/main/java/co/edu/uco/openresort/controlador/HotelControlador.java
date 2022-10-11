@@ -30,4 +30,9 @@ public class HotelControlador {
     public ArrayList<HotelDTO> consultar(){
         return hotelFachada.consultar();
     }
+
+    @PostMapping
+    public HotelDTO registrar(@RequestBody HotelDTO hotelDTO){
+        return hotelFachada.registrar(hotelDTO);
+    }
 }

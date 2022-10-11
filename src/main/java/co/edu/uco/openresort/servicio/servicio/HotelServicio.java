@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface HotelServicio {
 
     ArrayList<HotelDominio> consultar();
-    HotelDominio registrar(HotelDominio hotel);
+    HotelDominio registrar(HotelDominio hotelDominio);
     HotelDominio editar(HotelDominio hotelDominio);
     void eliminar(HotelDominio hotelDominio);
 

@@ -1,5 +1,6 @@
 package co.edu.uco.openresort.servicio.fachada.implementacion;
 
+import co.edu.uco.openresort.dominio.HotelDominio;
 import co.edu.uco.openresort.dto.HotelDTO;
 import co.edu.uco.openresort.servicio.ensamblador.dto.HotelEnsambladorDTO;
 import co.edu.uco.openresort.servicio.fachada.HotelFachada;
@@ -22,7 +23,7 @@ public class HotelFachadaImplementacion implements HotelFachada {
 
     @Override
     public HotelDTO registrar(HotelDTO hotelDTO) {
-        return null;
+        return HotelEnsambladorDTO.ensamblarDTO(hotelServicio.registrar(HotelEnsambladorDTO.ensamblarDominio(hotelDTO)));
     }
 
     @Override

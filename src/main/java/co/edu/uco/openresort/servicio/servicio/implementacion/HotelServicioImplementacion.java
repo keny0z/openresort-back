@@ -24,8 +24,8 @@ public class HotelServicioImplementacion implements co.edu.uco.openresort.servic
     }
 
     @Override
-    public HotelDominio registrar(HotelDominio hotel) {
-        return null;
+    public HotelDominio registrar(HotelDominio hotelDominio) {
+        return HotelEnsambladorEntidad.ensamblarDominio(hotelRepositorio.save(HotelEnsambladorEntidad.ensamblarEntidad(hotelDominio)));
     }
 
     @Override
