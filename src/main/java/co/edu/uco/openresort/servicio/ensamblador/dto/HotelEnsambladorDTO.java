@@ -9,12 +9,14 @@ public class HotelEnsambladorDTO {
 
     public static HotelDominio ensamblarDominio(HotelDTO hotelDTO){
         HotelDominio hotelDominio = new HotelDominio();
+        hotelDominio.setId(hotelDTO.getId());
         hotelDominio.setNombre(hotelDTO.getNombre());
         return hotelDominio;
     }
 
     public static HotelDTO ensamblarDTO(HotelDominio hotelDominio){
         HotelDTO hotelDto = new HotelDTO();
+        hotelDto.setId(hotelDominio.getId());
         hotelDto.setNombre(hotelDominio.getNombre());
         return hotelDto;
     }

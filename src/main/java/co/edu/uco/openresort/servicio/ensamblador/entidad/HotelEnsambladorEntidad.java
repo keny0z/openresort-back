@@ -9,6 +9,7 @@ public class HotelEnsambladorEntidad {
 
     public static HotelDominio ensamblarDominio(HotelEntidad hotelEntidad){
         HotelDominio hotelDominio = new HotelDominio();
+        hotelDominio.setId(hotelEntidad.getId());
         hotelDominio.setNombre(hotelEntidad.getNombre());
         return hotelDominio;
     }

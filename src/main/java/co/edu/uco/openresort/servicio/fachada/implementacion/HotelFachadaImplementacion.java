@@ -18,7 +18,7 @@ public class HotelFachadaImplementacion implements HotelFachada {
 
     @Override
     public ArrayList<HotelDTO> consultar() {
-        return HotelEnsambladorDTO.ensamblarListaDTO(hotelServicio.consultar()) ;
+        return HotelEnsambladorDTO.ensamblarListaDTO(hotelServicio.consultar());
     }
 
     @Override
