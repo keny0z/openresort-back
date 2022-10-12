@@ -8,7 +8,6 @@ public interface HotelServicio {
 
     ArrayList<HotelDominio> consultar();
     HotelDominio registrar(HotelDominio hotelDominio);
-    HotelDominio editar(HotelDominio hotelDominio);
     void eliminar(int id);
 
 }

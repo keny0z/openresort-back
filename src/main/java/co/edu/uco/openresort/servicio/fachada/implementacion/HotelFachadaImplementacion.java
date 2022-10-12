@@ -27,11 +27,6 @@ public class HotelFachadaImplementacion implements HotelFachada {
     }
 
     @Override
-    public HotelDTO editar(HotelDTO hotelDTO) {
-        return null;
-    }
-
-    @Override
     public void eliminar(int id) {
         hotelServicio.eliminar(id);
     }

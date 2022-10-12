@@ -8,7 +8,6 @@ public interface HotelFachada {
 
     ArrayList<HotelDTO> consultar();
     HotelDTO registrar(HotelDTO hotelDTO);
-    HotelDTO editar(HotelDTO hotelDTO);
     void eliminar(int id);
 
 }

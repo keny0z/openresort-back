@@ -29,26 +29,8 @@ public class HotelServicioImplementacion implements co.edu.uco.openresort.servic
     }
 
     @Override
-    public HotelDominio editar(HotelDominio hotelDominio) {
-        return null;
-    }
-
-    @Override
     public void eliminar(int id) {
         hotelRepositorio.deleteById(id);
     }
-
-
-    /*@Autowired
-    HotelRepositorio hotelRepositorio;
-
-
-    public HotelEntidad registrar(HotelEntidad hotelEntidad){
-        return hotelRepositorio.save(hotelEntidad);
-    }
-
-    public ArrayList<HotelEntidad> consultar(){
-        return (ArrayList<HotelEntidad>) hotelRepositorio.findAll();
-    }*/
 
 }
