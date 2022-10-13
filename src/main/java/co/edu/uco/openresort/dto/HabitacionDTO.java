@@ -1,15 +1,15 @@
-package co.edu.uco.openresort.dominio;
+package co.edu.uco.openresort.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class HabitacionDominio {
+public class HabitacionDTO {
 
     private int id;
-    private HotelDominio hotel;
-    private TipoHabitacionDominio tipo;
+    private int idHotel;
+    private int idTipo;
     private String numero;
     private boolean disponible;
 }
