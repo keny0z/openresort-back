@@ -29,4 +29,14 @@ public class HabitacionFachadaImplementacion implements HabitacionFachada {
     public void eliminar(int id) {
         habitacionServicio.eliminar(id);
     }
+
+    @Override
+    public void darAcceso(long idTag, int idHabitacion) {
+        habitacionServicio.darAcceso(idTag,idHabitacion);
+    }
+
+    @Override
+    public ArrayList<HabitacionDTO> consultarPorTag(long identificador) {
+        return HabitacionEnsambladorDTO.ensamblarListaDTO(habitacionServicio.consultarPorTag(identificador));
+    }
 }

@@ -11,4 +11,11 @@ public interface HabitacionServicio {
     ArrayList<HabitacionDominio> consultar();
     HabitacionDominio registrar(HabitacionDominio habitacionDominio);
     void eliminar(int id);
+
+    void darAcceso(long idTag, int idHabitacion);
+
+    //consulta las habitaciones que pueden ser accedidas con un tag en especifico
+    ArrayList<HabitacionDominio> consultarPorTag(long identificador);
+
+
 }
