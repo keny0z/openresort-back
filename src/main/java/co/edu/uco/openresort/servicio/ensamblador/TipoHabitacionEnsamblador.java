@@ -35,12 +35,12 @@ public class TipoHabitacionEnsamblador {
     }
 
     public static ArrayList<TipoHabitacionDTO> ensamblarListaDTO(ArrayList<TipoHabitacionEntidad> listaTipoHabitacionEntidad){
-        ArrayList<TipoHabitacionDTO> listatipoHabitacionDTO = new ArrayList<>();
+        ArrayList<TipoHabitacionDTO> listaTipoHabitacionDTO = new ArrayList<>();
 
         for(TipoHabitacionEntidad tipoHabitacionEntidad : listaTipoHabitacionEntidad){
-            listatipoHabitacionDTO.add(ensamblarDTO(tipoHabitacionEntidad));
+            listaTipoHabitacionDTO.add(ensamblarDTO(tipoHabitacionEntidad));
         }
 
-        return listatipoHabitacionDTO;
+        return listaTipoHabitacionDTO;
     }
 }
