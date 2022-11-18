@@ -18,4 +18,9 @@ public class TagServicioImplementacion implements TagServicio {
     public ArrayList<TagEntidad> consultar() {
         return (ArrayList<TagEntidad>) tagRepositorio.findAll();
     }
+
+    @Override
+    public ArrayList<TagEntidad> consultarPorHabitacion(int id) {
+        return tagRepositorio.findByHabitacionesConAcceso_Id(id);
+    }
 }

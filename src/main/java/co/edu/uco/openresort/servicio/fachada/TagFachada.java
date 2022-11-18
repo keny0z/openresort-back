@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface TagFachada {
     ArrayList<TagDTO> consultar();
+    ArrayList<TagDTO> consutarPorHabitacion(int id);
 }

@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface TagServicio {
     ArrayList<TagEntidad> consultar();
+    ArrayList<TagEntidad> consultarPorHabitacion(int id);
 }

@@ -19,4 +19,9 @@ public class TagFachadaImplementacion implements TagFachada {
     public ArrayList<TagDTO> consultar() {
         return TagEnsamblador.ensamblarListaDTO(tagServicio.consultar());
     }
+
+    @Override
+    public ArrayList<TagDTO> consutarPorHabitacion(int id) {
+        return TagEnsamblador.ensamblarListaDTO(tagServicio.consultarPorHabitacion(id));
+    }
 }
