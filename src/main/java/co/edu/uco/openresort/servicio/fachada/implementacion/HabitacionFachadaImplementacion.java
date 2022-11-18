@@ -1,7 +1,7 @@
 package co.edu.uco.openresort.servicio.fachada.implementacion;
 
 import co.edu.uco.openresort.dto.HabitacionDTO;
-import co.edu.uco.openresort.servicio.ensamblador.dto.HabitacionEnsambladorDTO;
+import co.edu.uco.openresort.servicio.ensamblador.HabitacionEnsamblador;
 import co.edu.uco.openresort.servicio.fachada.HabitacionFachada;
 import co.edu.uco.openresort.servicio.servicio.HabitacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ public class HabitacionFachadaImplementacion implements HabitacionFachada {
 
     @Override
     public ArrayList<HabitacionDTO> consultar() {
-        return HabitacionEnsambladorDTO.ensamblarListaDTO(habitacionServicio.consultar());
+        return HabitacionEnsamblador.ensamblarListaDTO(habitacionServicio.consultar());
     }
 
     @Override
     public HabitacionDTO registrar(HabitacionDTO habitacionDTO) {
-        return HabitacionEnsambladorDTO.ensamblarDTO(habitacionServicio.registrar(HabitacionEnsambladorDTO.ensamblarDominio(habitacionDTO)));
+        return HabitacionEnsamblador.ensamblarDTO(habitacionServicio.registrar(HabitacionEnsamblador.ensamblarEntidad(habitacionDTO)));
     }
 
     @Override
@@ -37,6 +37,6 @@ public class HabitacionFachadaImplementacion implements HabitacionFachada {
 
     @Override
     public ArrayList<HabitacionDTO> consultarPorTag(long identificador) {
-        return HabitacionEnsambladorDTO.ensamblarListaDTO(habitacionServicio.consultarPorTag(identificador));
+        return HabitacionEnsamblador.ensamblarListaDTO(habitacionServicio.consultarPorTag(identificador));
     }
 }

@@ -1,6 +1,5 @@
 package co.edu.uco.openresort.servicio.servicio.implementacion;
 
-import co.edu.uco.openresort.dominio.HabitacionDominio;
 import co.edu.uco.openresort.entidad.HabitacionEntidad;
 import co.edu.uco.openresort.entidad.TagEntidad;
 import co.edu.uco.openresort.excepcion.ExcepcionHotelNoExiste;
@@ -9,7 +8,6 @@ import co.edu.uco.openresort.repositorio.HabitacionRepositorio;
 import co.edu.uco.openresort.repositorio.HotelRepositorio;
 import co.edu.uco.openresort.repositorio.TagRepositorio;
 import co.edu.uco.openresort.repositorio.TipoHabitacionRepositorio;
-import co.edu.uco.openresort.servicio.ensamblador.entidad.HabitacionEnsambladorEntidad;
 import co.edu.uco.openresort.servicio.servicio.HabitacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,15 +34,15 @@ public class HabitacionServicioImplementacion implements HabitacionServicio {
 
 
     @Override
-    public ArrayList<HabitacionDominio> consultar() {
-        return HabitacionEnsambladorEntidad.ensamblarListaDominio((ArrayList<HabitacionEntidad>) habitacionRepositorio.findAll());
+    public ArrayList<HabitacionEntidad> consultar() {
+        return (ArrayList<HabitacionEntidad>) habitacionRepositorio.findAll();
     }
 
     @Override
-    public HabitacionDominio registrar(HabitacionDominio habitacionDominio) {
-        garantizarHotelExiste(habitacionDominio.getHotel().getId());
-        garantizarTipoHabitacionExiste(habitacionDominio.getTipo().getId());
-        return HabitacionEnsambladorEntidad.ensamblarDominio(habitacionRepositorio.save(HabitacionEnsambladorEntidad.ensamblarEntidad(habitacionDominio)));
+    public HabitacionEntidad registrar(HabitacionEntidad habitacionEntidad) {
+        garantizarHotelExiste(habitacionEntidad.getHotel().getId());
+        garantizarTipoHabitacionExiste(habitacionEntidad.getTipo().getId());
+        return habitacionRepositorio.save(habitacionEntidad);
     }
 
     @Override
@@ -64,8 +62,8 @@ public class HabitacionServicioImplementacion implements HabitacionServicio {
     }
 
     @Override
-    public ArrayList<HabitacionDominio> consultarPorTag(long identificador) {
-        return HabitacionEnsambladorEntidad.ensamblarListaDominio((ArrayList<HabitacionEntidad>) habitacionRepositorio.findByTagsConAcceso_Identificador(identificador));
+    public ArrayList<HabitacionEntidad> consultarPorTag(long identificador) {
+        return habitacionRepositorio.findByTagsConAcceso_Identificador(identificador);
     }
 
     private void garantizarHotelExiste(int id){

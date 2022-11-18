@@ -1,9 +1,7 @@
 package co.edu.uco.openresort.servicio.servicio.implementacion;
 
-import co.edu.uco.openresort.dominio.TipoHabitacionDominio;
 import co.edu.uco.openresort.entidad.TipoHabitacionEntidad;
 import co.edu.uco.openresort.repositorio.TipoHabitacionRepositorio;
-import co.edu.uco.openresort.servicio.ensamblador.entidad.TipoHabitacionEnsambladorEntidad;
 import co.edu.uco.openresort.servicio.servicio.TipoHabitacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +15,13 @@ public class TipoHabitacionServicioImplementacion implements TipoHabitacionServi
     private TipoHabitacionRepositorio tipoHabitacionRepositorio;
 
     @Override
-    public ArrayList<TipoHabitacionDominio> consultar() {
-        return TipoHabitacionEnsambladorEntidad.ensamblarListaDominio((ArrayList<TipoHabitacionEntidad>) tipoHabitacionRepositorio.findAll());
+    public ArrayList<TipoHabitacionEntidad> consultar() {
+        return (ArrayList<TipoHabitacionEntidad>) tipoHabitacionRepositorio.findAll();
     }
 
     @Override
-    public TipoHabitacionDominio registrar(TipoHabitacionDominio tipoHabitacionDominio) {
-        return TipoHabitacionEnsambladorEntidad.ensamblarDominio(tipoHabitacionRepositorio.save(TipoHabitacionEnsambladorEntidad.ensamblarEntidad(tipoHabitacionDominio)));
+    public TipoHabitacionEntidad registrar(TipoHabitacionEntidad tipoHabitacionEntidad) {
+        return tipoHabitacionRepositorio.save(tipoHabitacionEntidad);
     }
 
     @Override

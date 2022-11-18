@@ -1,8 +1,7 @@
 package co.edu.uco.openresort.servicio.fachada.implementacion;
 
-import co.edu.uco.openresort.dominio.HotelDominio;
 import co.edu.uco.openresort.dto.HotelDTO;
-import co.edu.uco.openresort.servicio.ensamblador.dto.HotelEnsambladorDTO;
+import co.edu.uco.openresort.servicio.ensamblador.HotelEnsamblador;
 import co.edu.uco.openresort.servicio.fachada.HotelFachada;
 import co.edu.uco.openresort.servicio.servicio.HotelServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +17,12 @@ public class HotelFachadaImplementacion implements HotelFachada {
 
     @Override
     public ArrayList<HotelDTO> consultar() {
-        return HotelEnsambladorDTO.ensamblarListaDTO(hotelServicio.consultar());
+        return HotelEnsamblador.ensamblarListaDTO(hotelServicio.consultar());
     }
 
     @Override
     public HotelDTO registrar(HotelDTO hotelDTO) {
-        return HotelEnsambladorDTO.ensamblarDTO(hotelServicio.registrar(HotelEnsambladorDTO.ensamblarDominio(hotelDTO)));
+        return HotelEnsamblador.ensamblarDTO(hotelServicio.registrar(HotelEnsamblador.ensamblarEntidad(hotelDTO)));
     }
 
     @Override
