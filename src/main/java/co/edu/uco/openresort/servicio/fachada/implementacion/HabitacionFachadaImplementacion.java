@@ -39,4 +39,9 @@ public class HabitacionFachadaImplementacion implements HabitacionFachada {
     public ArrayList<HabitacionDTO> consultarPorTag(long identificador) {
         return HabitacionEnsamblador.ensamblarListaDTO(habitacionServicio.consultarPorTag(identificador));
     }
+
+    @Override
+    public boolean tieneAcceso(long idTag, int idHabitacion) {
+        return habitacionServicio.tieneAcceso(idTag,idHabitacion);
+    }
 }

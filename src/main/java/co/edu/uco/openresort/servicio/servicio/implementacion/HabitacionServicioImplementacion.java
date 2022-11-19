@@ -66,6 +66,17 @@ public class HabitacionServicioImplementacion implements HabitacionServicio {
         return habitacionRepositorio.findByTagsConAcceso_Identificador(identificador);
     }
 
+    @Override
+    public boolean tieneAcceso(long idTag, int idHabitacion) {
+        ArrayList<HabitacionEntidad> habitaciones = consultarPorTag(idTag);
+        if(habitaciones.contains(habitacionRepositorio.findById(idHabitacion).get())){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
     private void garantizarHotelExiste(int id){
         if(hotelRepositorio.existsById(id)==false){
             throw new ExcepcionHotelNoExiste(MENSAJE_HOTEL_NO_EXISTE);

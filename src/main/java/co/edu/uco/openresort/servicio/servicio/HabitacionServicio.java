@@ -17,5 +17,7 @@ public interface HabitacionServicio {
     //consulta las habitaciones que pueden ser accedidas con un tag en especifico
     ArrayList<HabitacionEntidad> consultarPorTag(long identificador);
 
+    boolean tieneAcceso(long idTag,int idHabitacion);
+
 
 }

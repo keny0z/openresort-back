@@ -13,4 +13,8 @@ public interface HabitacionFachada {
     void darAcceso(long idTag, int idHabitacion);
 
     ArrayList<HabitacionDTO> consultarPorTag(long identificador);
+
+    boolean tieneAcceso(long idTag,int idHabitacion);
+
+
 }
