@@ -48,7 +48,7 @@ public class HabitacionControlador {
         if (habitacionFachada.tieneAcceso(accesoDTO.getIdTag(),accesoDTO.getIdHabitacion())){
             return new ResponseEntity<>(true, HttpStatus.OK);
         }else {
-            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(false, HttpStatus.OK);
         }
     }
 }
