@@ -1,6 +1,7 @@
 package co.edu.uco.openresort.controlador.error;
 
 import co.edu.uco.openresort.excepcion.ExcepcionHotelNoExiste;
+import co.edu.uco.openresort.excepcion.ExcepcionHotelNombreRepetido;
 import co.edu.uco.openresort.excepcion.ExcepcionTipoHabitacionNoExiste;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         //CODIGOS_ESTADO.put(ExcepcionValorObligatorio.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionHotelNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionTipoHabitacionNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+        CODIGOS_ESTADO.put(ExcepcionHotelNombreRepetido.class.getSimpleName(), HttpStatus.CONFLICT.value());
     }
 
     @ExceptionHandler(Exception.class)

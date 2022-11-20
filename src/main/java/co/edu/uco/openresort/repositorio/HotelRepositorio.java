@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HotelRepositorio extends CrudRepository<HotelEntidad,Integer> {
+    boolean existsByNombre(String nombre);
 }
