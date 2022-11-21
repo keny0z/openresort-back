@@ -21,6 +21,7 @@ public class HabitacionServicioImplementacion implements HabitacionServicio {
     private static final String MENSAJE_TIPO_HABITACION_NO_EXISTE = "El tipo de habitacion no existe";
     private static final String MENSAJE_NUMERO_HABITACION_REPETIDO = "Ya existe una habitación con el número ingresado, intente con un número distinto";
     private static final String MENSAJE_HABITACION_NO_EXISTE = "La habitacion ingresada no existe, intente con una distinta";
+    private static final String MENSAJE_DAR_ACCESO_FALLIDO = "No fue posible darle acceso al tag, intente nuevamente";
 
 
 
@@ -56,7 +57,7 @@ public class HabitacionServicioImplementacion implements HabitacionServicio {
     }
 
     @Override
-    public void darAcceso(long idTag, int idHabitacion) {
+    public String darAcceso(long idTag, int idHabitacion) {
 
         garantizarHabitacionExiste(idHabitacion);
 
@@ -65,8 +66,14 @@ public class HabitacionServicioImplementacion implements HabitacionServicio {
         tagEntidad.setIdentificador(idTag);
         habitacionEntidad.get().getTagsConAcceso().add(tagEntidad);
 
-        tagRepositorio.save(tagEntidad);
-        habitacionRepositorio.save(habitacionEntidad.get());
+        try{
+            tagRepositorio.save(tagEntidad);
+            habitacionRepositorio.save(habitacionEntidad.get());
+            return "acceso concedido";
+        }catch (ExcepcionDarAccesoFallido e){
+            throw new ExcepcionDarAccesoFallido(MENSAJE_DAR_ACCESO_FALLIDO);
+        }
+
     }
 
     @Override

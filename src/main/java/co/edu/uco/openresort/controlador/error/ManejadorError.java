@@ -33,6 +33,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         //CODIGOS_ESTADO.put(ExcepcionHabitacionNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionHabitacionNoExiste.class.getSimpleName(), HttpStatus.OK.value());
         //-------------------------------
+        CODIGOS_ESTADO.put(ExcepcionDarAccesoFallido.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
 
     }
 

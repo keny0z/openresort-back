@@ -33,8 +33,9 @@ public class HabitacionControlador {
     }
 
     @PostMapping(path = "acceso")
-    public void darAcceso(@RequestBody AccesoDTO accesoDTO){
-        habitacionFachada.darAcceso(accesoDTO.getIdTag(),accesoDTO.getIdHabitacion());
+    public ResponseEntity<String> darAcceso(@RequestBody AccesoDTO accesoDTO){
+        String respuesta = habitacionFachada.darAcceso(accesoDTO.getIdTag(),accesoDTO.getIdHabitacion());
+        return new ResponseEntity<>(respuesta,HttpStatus.OK);
     }
 
     @GetMapping(path="/{identificador}")

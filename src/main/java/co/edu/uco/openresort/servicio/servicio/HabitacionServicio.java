@@ -12,7 +12,7 @@ public interface HabitacionServicio {
     HabitacionEntidad registrar(HabitacionEntidad habitacionEntidad);
     void eliminar(int id);
 
-    void darAcceso(long idTag, int idHabitacion);
+    String darAcceso(long idTag, int idHabitacion);
 
     //consulta las habitaciones que pueden ser accedidas con un tag en especifico
     ArrayList<HabitacionEntidad> consultarPorTag(long identificador);

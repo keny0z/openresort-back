@@ -10,7 +10,7 @@ public interface HabitacionFachada {
     HabitacionDTO registrar(HabitacionDTO habitacionDTO);
     void eliminar(int id);
 
-    void darAcceso(long idTag, int idHabitacion);
+    String darAcceso(long idTag, int idHabitacion);
 
     ArrayList<HabitacionDTO> consultarPorTag(long identificador);
 

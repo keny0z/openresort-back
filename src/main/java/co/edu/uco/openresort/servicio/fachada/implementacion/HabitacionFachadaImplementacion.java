@@ -31,8 +31,8 @@ public class HabitacionFachadaImplementacion implements HabitacionFachada {
     }
 
     @Override
-    public void darAcceso(long idTag, int idHabitacion) {
-        habitacionServicio.darAcceso(idTag,idHabitacion);
+    public String darAcceso(long idTag, int idHabitacion) {
+        return habitacionServicio.darAcceso(idTag,idHabitacion);
     }
 
     @Override
