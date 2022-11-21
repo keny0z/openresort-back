@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TipoHabitacionRepositorio extends CrudRepository<TipoHabitacionEntidad,Integer> {
+    boolean existsByNombre(String nombre);
 }
