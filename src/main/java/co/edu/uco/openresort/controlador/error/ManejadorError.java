@@ -1,9 +1,6 @@
 package co.edu.uco.openresort.controlador.error;
 
-import co.edu.uco.openresort.excepcion.ExcepcionHotelNoExiste;
-import co.edu.uco.openresort.excepcion.ExcepcionHotelNombreRepetido;
-import co.edu.uco.openresort.excepcion.ExcepcionTipoHabitacionNoExiste;
-import co.edu.uco.openresort.excepcion.ExcepcionTipoHabitacionNombreRepetido;
+import co.edu.uco.openresort.excepcion.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -25,12 +22,14 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
     private static final ConcurrentHashMap<String, Integer> CODIGOS_ESTADO = new ConcurrentHashMap<>();
 
     public ManejadorError() {
-        //CODIGOS_ESTADO.put(ExcepcionUsuarioRepetido.class.getSimpleName(), HttpStatus.CONFLICT.value());
-        //CODIGOS_ESTADO.put(ExcepcionValorObligatorio.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+
         CODIGOS_ESTADO.put(ExcepcionHotelNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionTipoHabitacionNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionHotelNombreRepetido.class.getSimpleName(), HttpStatus.CONFLICT.value());
         CODIGOS_ESTADO.put(ExcepcionTipoHabitacionNombreRepetido.class.getSimpleName(), HttpStatus.CONFLICT.value());
+        CODIGOS_ESTADO.put(ExcepcionHabitacionNumeroRepetido.class.getSimpleName(), HttpStatus.CONFLICT.value());
+        CODIGOS_ESTADO.put(ExcepcionHabitacionNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+
     }
 
     @ExceptionHandler(Exception.class)
