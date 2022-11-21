@@ -28,7 +28,11 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         CODIGOS_ESTADO.put(ExcepcionHotelNombreRepetido.class.getSimpleName(), HttpStatus.CONFLICT.value());
         CODIGOS_ESTADO.put(ExcepcionTipoHabitacionNombreRepetido.class.getSimpleName(), HttpStatus.CONFLICT.value());
         CODIGOS_ESTADO.put(ExcepcionHabitacionNumeroRepetido.class.getSimpleName(), HttpStatus.CONFLICT.value());
-        CODIGOS_ESTADO.put(ExcepcionHabitacionNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+        //-------------------------------
+        //el codigo de estado siempre debe ser OK (200) para poder que hardware_api retorne los mensajes de respuesta
+        //CODIGOS_ESTADO.put(ExcepcionHabitacionNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+        CODIGOS_ESTADO.put(ExcepcionHabitacionNoExiste.class.getSimpleName(), HttpStatus.OK.value());
+        //-------------------------------
 
     }
 
