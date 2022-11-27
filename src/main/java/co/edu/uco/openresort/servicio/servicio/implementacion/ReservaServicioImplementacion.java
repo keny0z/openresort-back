@@ -22,7 +22,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
 
 
     @Override
-    public ArrayList<HabitacionEntidad> consultarDisponibilidad(DisponibilidadDTO disponibilidadDTO) {
+    public ArrayList<HabitacionEntidad> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO) {
 
         //1. filtrar de todas las habitaciones del hotel seleccionado
         ArrayList<HabitacionEntidad> habitacionesHotel = buscarHabitacionesPorHotelId(disponibilidadDTO.getIdHotel());

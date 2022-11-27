@@ -7,6 +7,6 @@ import co.edu.uco.openresort.dto.TipoHabitacionDTO;
 import java.util.ArrayList;
 
 public interface ReservaFachada {
-    ArrayList<HabitacionDTO> consultarDisponibilidad(DisponibilidadDTO disponibilidadDTO);
+    ArrayList<HabitacionDTO> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO);
 
 }

@@ -18,8 +18,8 @@ public class ReservaControlador {
     @Autowired
     private ReservaFachada reservaFachada;
 
-    @PostMapping("/disponibilidad")
-    public ArrayList<HabitacionDTO> consultarDisponibilidad(@RequestBody DisponibilidadDTO disponibilidadDTO){
-        return reservaFachada.consultarDisponibilidad(disponibilidadDTO);
+    @PostMapping("/disponibilidad/habitacion")
+    public ArrayList<HabitacionDTO> consultarDisponibilidadHabitaciones(@RequestBody DisponibilidadDTO disponibilidadDTO){
+        return reservaFachada.consultarDisponibilidadHabitaciones(disponibilidadDTO);
     }
 }

@@ -19,7 +19,7 @@ public class HabitacionEntidad {
     @ManyToOne
     private TipoHabitacionEntidad tipo;
     private String numero;
-    private boolean disponible;
+    private boolean disponible; //para indicar si tiene o no tiene una reserva en el momento
 
     @ManyToMany
     @JoinTable(name="habitacion_tags_con_acceso",

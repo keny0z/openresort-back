@@ -7,5 +7,5 @@ import co.edu.uco.openresort.entidad.TipoHabitacionEntidad;
 import java.util.ArrayList;
 
 public interface ReservaServicio {
-    ArrayList<HabitacionEntidad> consultarDisponibilidad(DisponibilidadDTO disponibilidadDTO);
+    ArrayList<HabitacionEntidad> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO);
 }
