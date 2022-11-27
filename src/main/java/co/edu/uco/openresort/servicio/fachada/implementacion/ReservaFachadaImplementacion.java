@@ -4,6 +4,7 @@ import co.edu.uco.openresort.dto.DisponibilidadDTO;
 import co.edu.uco.openresort.dto.HabitacionDTO;
 import co.edu.uco.openresort.dto.TipoHabitacionDTO;
 import co.edu.uco.openresort.servicio.ensamblador.HabitacionEnsamblador;
+import co.edu.uco.openresort.servicio.ensamblador.TipoHabitacionEnsamblador;
 import co.edu.uco.openresort.servicio.fachada.ReservaFachada;
 import co.edu.uco.openresort.servicio.servicio.ReservaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,10 @@ public class ReservaFachadaImplementacion implements ReservaFachada {
     public ArrayList<HabitacionDTO> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO) {
         return HabitacionEnsamblador.ensamblarListaDTO(reservaServicio.consultarDisponibilidadHabitaciones(disponibilidadDTO));
 
+    }
+
+    @Override
+    public ArrayList<TipoHabitacionDTO> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO) {
+        return TipoHabitacionEnsamblador.ensamblarListaDTO(reservaServicio.consultarDisponibilidadTipoHabitacion(disponibilidadDTO));
     }
 }

@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 public class ReservaServicioImplementacion implements ReservaServicio {
 
@@ -33,12 +36,20 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         //3. filtrar las habitaciones que tienen disponibilidad
         ArrayList<HabitacionEntidad> habitacionesDisponibles = buscarHabitacionesDisponibles(disponibilidadDTO.getFechaLLegada(),disponibilidadDTO.getFechaSalida(),habitacionesConCapacidad);
 
-        for (HabitacionEntidad habitacionEntidad : habitacionesDisponibles) {
-            System.out.println(habitacionEntidad.getId());
-        }
-
-
         return habitacionesDisponibles;
+    }
+
+    @Override
+    public ArrayList<TipoHabitacionEntidad> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO) {
+        ArrayList<HabitacionEntidad> habitacionesDisponibles = consultarDisponibilidadHabitaciones(disponibilidadDTO);
+        ArrayList<TipoHabitacionEntidad> tipoHabitaciones = new ArrayList<>();
+        for (HabitacionEntidad habitacionEntidad:habitacionesDisponibles) {
+            if(!tipoHabitaciones.contains(habitacionEntidad.getTipo())){
+                tipoHabitaciones.add(habitacionEntidad.getTipo());
+            }
+
+        }
+        return tipoHabitaciones;
     }
 
     private ArrayList<ReservaEntidad> buscarReservasPorHabitacionId(int id){

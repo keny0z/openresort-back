@@ -19,5 +19,5 @@ public class TagEntidad {
     @JoinTable(name="habitacion_tags_con_acceso",
             joinColumns=@JoinColumn(name="tag_con_acceso_id"),
             inverseJoinColumns=@JoinColumn(name="habitacion_id"))
-    private Set<HabitacionEntidad> habitacionesConAcceso;
+    private Set<HabitacionEntidad> habitacionesConAcceso; //Set almacena datos unicos, no permite duplicidad
 }
