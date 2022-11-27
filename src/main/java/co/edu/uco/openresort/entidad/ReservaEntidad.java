@@ -19,4 +19,7 @@ public class ReservaEntidad {
     private LocalDateTime fechaLlegada;
     private LocalDateTime fechaSalida;
     private LocalDateTime fechaRealizacion;
+    private int adultos;
+    private int ninos;
+    private String numeroHabitacion;
 }

@@ -11,4 +11,5 @@ public interface HabitacionRepositorio extends CrudRepository<HabitacionEntidad,
     ArrayList<HabitacionEntidad> findByTagsConAcceso_Identificador(long identificador);
 
     boolean existsByNumero(String numero);
+    ArrayList<HabitacionEntidad> findByHotel_Id(int id);
 }

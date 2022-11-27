@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/habtacion")
+@RequestMapping("/habitacion")
 public class HabitacionControlador {
 
     @Autowired
