@@ -12,6 +12,4 @@ public interface HabitacionRepositorio extends CrudRepository<HabitacionEntidad,
 
     boolean existsByNumero(String numero);
     ArrayList<HabitacionEntidad> findByHotel_Id(int id);
-
-    ArrayList<HabitacionEntidad> findByHotel_IdAndTipo_Id(int idHotel, int idTipo);
 }

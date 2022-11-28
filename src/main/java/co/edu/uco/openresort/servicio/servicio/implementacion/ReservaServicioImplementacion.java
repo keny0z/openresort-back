@@ -5,37 +5,64 @@ import co.edu.uco.openresort.dto.ReservaDTO;
 import co.edu.uco.openresort.entidad.HabitacionEntidad;
 import co.edu.uco.openresort.entidad.ReservaEntidad;
 import co.edu.uco.openresort.entidad.TipoHabitacionEntidad;
+import co.edu.uco.openresort.excepcion.*;
 import co.edu.uco.openresort.repositorio.HabitacionRepositorio;
+import co.edu.uco.openresort.repositorio.HotelRepositorio;
 import co.edu.uco.openresort.repositorio.ReservaRepositorio;
+import co.edu.uco.openresort.repositorio.TipoHabitacionRepositorio;
 import co.edu.uco.openresort.servicio.servicio.ReservaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class ReservaServicioImplementacion implements ReservaServicio {
+
+    private static final String MENSAJE_HOTEL_NO_EXISTE = "El hotel no existe";
+    private static final String MENSAJE_TIPO_HABITACION_NO_EXISTE = "El tipo de habitacion no existe";
+    private static final String MENSAJE_HOTEL_SIN_HABITACIONES = "El hotel no tiene habitaciones registradas";
+    private static final String MENSAJE_RESERVA_CAPACIDAD_INSUFICIENTE = "No existen habitaciones con capacidad suficiente";
+    private static final String MENSAJE_RESERVA_HABITACIONES_NO_DISPONIBLES = "No hay disponibilidad de habitaciones para las fechas seleccionadas";
+    private static final String MENSAJE_TIPO_HABITACION_NO_DISPONIBLE_EN_HOTEL = "El tipo de habitacion seleccionado no está disponible en el hotel seleccionado";
 
     @Autowired
     private ReservaRepositorio reservaRepositorio;
     @Autowired
     private HabitacionRepositorio habitacionRepositorio;
+    @Autowired
+    private HotelRepositorio hotelRepositorio;
+    @Autowired
+    private TipoHabitacionRepositorio tipoHabitacionRepositorio;
 
 
     @Override
     public ArrayList<HabitacionEntidad> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO) {
 
+        garantizarHotelExiste(disponibilidadDTO.getIdHotel());
+
+
         //1. filtrar de todas las habitaciones del hotel seleccionado
         ArrayList<HabitacionEntidad> habitacionesHotel = buscarHabitacionesPorHotelId(disponibilidadDTO.getIdHotel());
+
+        if(habitacionesHotel.size()==0){
+            throw new ExcepcionHabitacionNoExiste(MENSAJE_HOTEL_SIN_HABITACIONES);
+        }
 
         //2. filtrar las habitaciones que tienen capacidad suficiente
         ArrayList<HabitacionEntidad> habitacionesConCapacidad = buscarHabitacionesConCapacidad(disponibilidadDTO.getAdultos(),disponibilidadDTO.getNinos(),habitacionesHotel);
 
+        if(habitacionesConCapacidad.size()==0){
+            throw new ExcepcionReservaCapacidadInsuficiente(MENSAJE_RESERVA_CAPACIDAD_INSUFICIENTE);
+        }
+
         //3. filtrar las habitaciones que tienen disponibilidad
         ArrayList<HabitacionEntidad> habitacionesDisponibles = buscarHabitacionesDisponibles(disponibilidadDTO.getFechaLLegada(),disponibilidadDTO.getFechaSalida(),habitacionesConCapacidad);
+
+        if(habitacionesDisponibles.size()==0){
+            throw new ExcepcionReservaSinDisponibilidad(MENSAJE_RESERVA_HABITACIONES_NO_DISPONIBLES);
+        }
 
         return habitacionesDisponibles;
     }
@@ -56,17 +83,31 @@ public class ReservaServicioImplementacion implements ReservaServicio {
     @Override
     public ReservaEntidad reservar(ReservaDTO reservaDTO) {
 
-        // 1. filtrar habitaciones por Hotel y por Tipo
-        ArrayList<HabitacionEntidad> habitaciones = habitacionRepositorio.findByHotel_IdAndTipo_Id(reservaDTO.getIdHotel(),reservaDTO.getIdTipoHabitacion());
-        // 2. filtrar las habitaciones que tienen capacidad suficiente
-        ArrayList<HabitacionEntidad> habitacionesConCapacidad = buscarHabitacionesConCapacidad(reservaDTO.getAdultos(),reservaDTO.getNinos(),habitaciones);
-        //3. filtrar las habitaciones que tienen disponibilidad
-        ArrayList<HabitacionEntidad> habitacionesDisponibles = buscarHabitacionesDisponibles(reservaDTO.getFechaLlegada(),reservaDTO.getFechaSalida(),habitacionesConCapacidad);
+        garantizarHotelExiste(reservaDTO.getIdHotel());
+        garantizarTipoHabitacionExiste(reservaDTO.getIdTipoHabitacion());
+
+        DisponibilidadDTO disponibilidadDTO = new DisponibilidadDTO();
+
+        disponibilidadDTO.setIdHotel(reservaDTO.getIdHotel());
+        disponibilidadDTO.setFechaLLegada(reservaDTO.getFechaLlegada());
+        disponibilidadDTO.setFechaSalida(reservaDTO.getFechaSalida());
+        disponibilidadDTO.setAdultos(reservaDTO.getAdultos());
+        disponibilidadDTO.setNinos(reservaDTO.getNinos());
+
+        // 1. buscar disponibilidad de habitaciones sin tener en cuenta el tipo de habitacion
+        ArrayList<HabitacionEntidad> habitacionesDisponibles = consultarDisponibilidadHabitaciones(disponibilidadDTO);
+
+        // 2. filtrar habitaciones por tipo
+        ArrayList<HabitacionEntidad> habitacionesDisponiblesTipo = buscarHabitacionesPorTipo(reservaDTO.getIdTipoHabitacion(),habitacionesDisponibles);
+
+        if(habitacionesDisponiblesTipo.size()==0){
+            throw new ExcepcionHabitacionNoExiste(MENSAJE_TIPO_HABITACION_NO_DISPONIBLE_EN_HOTEL);
+        }
 
 
         ReservaEntidad reservaEntidad = new ReservaEntidad();
 
-        reservaEntidad.setHabitacion(habitacionesDisponibles.get(0));
+        reservaEntidad.setHabitacion(habitacionesDisponiblesTipo.get(0));
         reservaEntidad.setNumeroHabitacion(reservaEntidad.getHabitacion().getNumero());
 
         reservaEntidad.setAdultos(reservaDTO.getAdultos());
@@ -120,6 +161,18 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         return habitacionesConCapacidad;
     }
 
+    private ArrayList<HabitacionEntidad> buscarHabitacionesPorTipo(int idTipo, ArrayList<HabitacionEntidad> habitacionesEntidad){
+        ArrayList<HabitacionEntidad> habitacionesTipo = new ArrayList<>();
+
+        for (HabitacionEntidad habitacionEntidad:habitacionesEntidad){
+            if (habitacionEntidad.getTipo().getId()==idTipo){
+                habitacionesTipo.add(habitacionEntidad);
+            }
+        }
+
+        return  habitacionesTipo;
+    }
+
     //https://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap?page=1&tab=scoredesc#tab-top
     private Boolean estaDisponible(LocalDateTime fechaLlegada, LocalDateTime fechaSalida, HabitacionEntidad habitacionEntidad){
         Boolean disponible = true;
@@ -133,6 +186,20 @@ public class ReservaServicioImplementacion implements ReservaServicio {
 
         return disponible;
     }
+
+    private void garantizarHotelExiste(int id){
+        if(hotelRepositorio.existsById(id)==false){
+            throw new ExcepcionHotelNoExiste(MENSAJE_HOTEL_NO_EXISTE);
+        }
+    }
+
+    private void garantizarTipoHabitacionExiste(int id){
+        if(tipoHabitacionRepositorio.existsById(id)==false){
+            throw new ExcepcionTipoHabitacionNoExiste(MENSAJE_TIPO_HABITACION_NO_EXISTE);
+        }
+    }
+
+
 
 
 }
