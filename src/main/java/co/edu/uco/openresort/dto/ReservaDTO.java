@@ -1,21 +1,18 @@
-package co.edu.uco.openresort.entidad;
+package co.edu.uco.openresort.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "reserva")
-public class ReservaEntidad {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReservaDTO {
+
     private int id;
-    @ManyToOne
-    private HabitacionEntidad habitacion;
+    private int idHotel;
+    private int idTipoHabitacion;
     private LocalDateTime fechaLlegada;
     private LocalDateTime fechaSalida;
     private LocalDateTime fechaRealizacion;
@@ -28,4 +25,5 @@ public class ReservaEntidad {
     private String pais;
     private String celular;
     private String identificacion;
+
 }

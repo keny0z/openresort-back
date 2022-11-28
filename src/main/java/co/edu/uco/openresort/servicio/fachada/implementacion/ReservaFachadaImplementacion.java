@@ -1,9 +1,8 @@
 package co.edu.uco.openresort.servicio.fachada.implementacion;
 
-import co.edu.uco.openresort.dto.DisponibilidadDTO;
-import co.edu.uco.openresort.dto.HabitacionDTO;
-import co.edu.uco.openresort.dto.TipoHabitacionDTO;
+import co.edu.uco.openresort.dto.*;
 import co.edu.uco.openresort.servicio.ensamblador.HabitacionEnsamblador;
+import co.edu.uco.openresort.servicio.ensamblador.ReservaEnsamblador;
 import co.edu.uco.openresort.servicio.ensamblador.TipoHabitacionEnsamblador;
 import co.edu.uco.openresort.servicio.fachada.ReservaFachada;
 import co.edu.uco.openresort.servicio.servicio.ReservaServicio;
@@ -27,5 +26,10 @@ public class ReservaFachadaImplementacion implements ReservaFachada {
     @Override
     public ArrayList<TipoHabitacionDTO> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO) {
         return TipoHabitacionEnsamblador.ensamblarListaDTO(reservaServicio.consultarDisponibilidadTipoHabitacion(disponibilidadDTO));
+    }
+
+    @Override
+    public ReservaDTO reservar(ReservaDTO reservaDTO) {
+        return ReservaEnsamblador.ensamblarDTO(reservaServicio.reservar(reservaDTO));
     }
 }

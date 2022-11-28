@@ -1,6 +1,7 @@
 package co.edu.uco.openresort.servicio.servicio.implementacion;
 
 import co.edu.uco.openresort.dto.DisponibilidadDTO;
+import co.edu.uco.openresort.dto.ReservaDTO;
 import co.edu.uco.openresort.entidad.HabitacionEntidad;
 import co.edu.uco.openresort.entidad.ReservaEntidad;
 import co.edu.uco.openresort.entidad.TipoHabitacionEntidad;
@@ -50,6 +51,41 @@ public class ReservaServicioImplementacion implements ReservaServicio {
 
         }
         return tipoHabitaciones;
+    }
+
+    @Override
+    public ReservaEntidad reservar(ReservaDTO reservaDTO) {
+
+        // 1. filtrar habitaciones por Hotel y por Tipo
+        ArrayList<HabitacionEntidad> habitaciones = habitacionRepositorio.findByHotel_IdAndTipo_Id(reservaDTO.getIdHotel(),reservaDTO.getIdTipoHabitacion());
+        // 2. filtrar las habitaciones que tienen capacidad suficiente
+        ArrayList<HabitacionEntidad> habitacionesConCapacidad = buscarHabitacionesConCapacidad(reservaDTO.getAdultos(),reservaDTO.getNinos(),habitaciones);
+        //3. filtrar las habitaciones que tienen disponibilidad
+        ArrayList<HabitacionEntidad> habitacionesDisponibles = buscarHabitacionesDisponibles(reservaDTO.getFechaLlegada(),reservaDTO.getFechaSalida(),habitacionesConCapacidad);
+
+
+        ReservaEntidad reservaEntidad = new ReservaEntidad();
+
+        reservaEntidad.setHabitacion(habitacionesDisponibles.get(0));
+        reservaEntidad.setNumeroHabitacion(reservaEntidad.getHabitacion().getNumero());
+
+        reservaEntidad.setAdultos(reservaDTO.getAdultos());
+        reservaEntidad.setNinos(reservaDTO.getNinos());
+        reservaEntidad.setFechaLlegada(reservaDTO.getFechaLlegada());
+        reservaEntidad.setFechaSalida(reservaDTO.getFechaSalida());
+
+
+        reservaEntidad.setNombres(reservaDTO.getNombres());
+        reservaEntidad.setApellidos(reservaDTO.getApellidos());
+        reservaEntidad.setCorreo(reservaDTO.getCorreo());
+        reservaEntidad.setPais(reservaDTO.getPais());
+        reservaEntidad.setCelular(reservaDTO.getCelular());
+        reservaEntidad.setIdentificacion(reservaDTO.getIdentificacion());
+
+        reservaEntidad.setFechaRealizacion(LocalDateTime.now());
+
+
+        return reservaRepositorio.save(reservaEntidad);
     }
 
     private ArrayList<ReservaEntidad> buscarReservasPorHabitacionId(int id){
