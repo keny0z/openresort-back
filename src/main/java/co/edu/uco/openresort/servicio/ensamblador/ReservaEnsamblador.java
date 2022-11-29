@@ -3,6 +3,8 @@ package co.edu.uco.openresort.servicio.ensamblador;
 import co.edu.uco.openresort.dto.ReservaDTO;
 import co.edu.uco.openresort.entidad.ReservaEntidad;
 
+import java.util.ArrayList;
+
 public class ReservaEnsamblador {
 
     //ReservaEntidad --> ReservaDTO
@@ -27,5 +29,15 @@ public class ReservaEnsamblador {
         reservaDTO.setIdentificacion(reservaEntidad.getIdentificacion());
 
         return reservaDTO;
+    }
+
+    public static ArrayList<ReservaDTO> ensamblarListaDTO(ArrayList<ReservaEntidad> listaReservaEntidad){
+        ArrayList<ReservaDTO> listaReservaDTO = new ArrayList<>();
+
+        for(ReservaEntidad reservaEntidad : listaReservaEntidad){
+            listaReservaDTO.add(ensamblarDTO(reservaEntidad));
+        }
+
+        return listaReservaDTO;
     }
 }

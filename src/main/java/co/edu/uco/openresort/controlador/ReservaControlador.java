@@ -3,10 +3,7 @@ package co.edu.uco.openresort.controlador;
 import co.edu.uco.openresort.dto.*;
 import co.edu.uco.openresort.servicio.fachada.ReservaFachada;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -30,5 +27,10 @@ public class ReservaControlador {
     @PostMapping
     public ReservaDTO reservar(@RequestBody ReservaDTO reservaDTO){
         return reservaFachada.reservar(reservaDTO);
+    }
+
+    @GetMapping
+    public ArrayList<ReservaDTO> consultar(){
+        return reservaFachada.consultar();
     }
 }

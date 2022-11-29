@@ -129,6 +129,11 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         return reservaRepositorio.save(reservaEntidad);
     }
 
+    @Override
+    public ArrayList<ReservaEntidad> consultar() {
+        return (ArrayList<ReservaEntidad>) reservaRepositorio.findAll();
+    }
+
     private ArrayList<ReservaEntidad> buscarReservasPorHabitacionId(int id){
         return reservaRepositorio.findByHabitacion_Id(id);
     }

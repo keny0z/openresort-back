@@ -10,6 +10,10 @@ import java.util.ArrayList;
 
 public interface ReservaServicio {
     ArrayList<HabitacionEntidad> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO);
+
     ArrayList<TipoHabitacionEntidad> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO);
+
     ReservaEntidad reservar(ReservaDTO reservaDTO);
+
+    ArrayList<ReservaEntidad> consultar();
 }
