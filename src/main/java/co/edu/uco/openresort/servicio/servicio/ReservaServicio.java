@@ -6,6 +6,7 @@ import co.edu.uco.openresort.entidad.HabitacionEntidad;
 import co.edu.uco.openresort.entidad.ReservaEntidad;
 import co.edu.uco.openresort.entidad.TipoHabitacionEntidad;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public interface ReservaServicio {
@@ -13,7 +14,7 @@ public interface ReservaServicio {
 
     ArrayList<TipoHabitacionEntidad> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO);
 
-    ReservaEntidad reservar(ReservaDTO reservaDTO);
+    ReservaEntidad reservar(ReservaDTO reservaDTO) throws IOException;
 
     ArrayList<ReservaEntidad> consultar();
 }

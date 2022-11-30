@@ -9,6 +9,7 @@ import co.edu.uco.openresort.servicio.servicio.ReservaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Service
@@ -29,7 +30,7 @@ public class ReservaFachadaImplementacion implements ReservaFachada {
     }
 
     @Override
-    public ReservaDTO reservar(ReservaDTO reservaDTO) {
+    public ReservaDTO reservar(ReservaDTO reservaDTO) throws IOException {
         return ReservaEnsamblador.ensamblarDTO(reservaServicio.reservar(reservaDTO));
     }
 

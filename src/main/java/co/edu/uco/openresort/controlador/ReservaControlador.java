@@ -5,6 +5,7 @@ import co.edu.uco.openresort.servicio.fachada.ReservaFachada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
@@ -25,7 +26,7 @@ public class ReservaControlador {
     }
 
     @PostMapping
-    public ReservaDTO reservar(@RequestBody ReservaDTO reservaDTO){
+    public ReservaDTO reservar(@RequestBody ReservaDTO reservaDTO) throws IOException {
         return reservaFachada.reservar(reservaDTO);
     }
 

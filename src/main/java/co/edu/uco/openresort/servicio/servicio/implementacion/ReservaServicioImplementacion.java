@@ -1,5 +1,6 @@
 package co.edu.uco.openresort.servicio.servicio.implementacion;
 
+import co.edu.uco.openresort.cliente.EmailCliente;
 import co.edu.uco.openresort.dto.DisponibilidadDTO;
 import co.edu.uco.openresort.dto.ReservaDTO;
 import co.edu.uco.openresort.entidad.HabitacionEntidad;
@@ -11,9 +12,11 @@ import co.edu.uco.openresort.repositorio.HotelRepositorio;
 import co.edu.uco.openresort.repositorio.ReservaRepositorio;
 import co.edu.uco.openresort.repositorio.TipoHabitacionRepositorio;
 import co.edu.uco.openresort.servicio.servicio.ReservaServicio;
+import com.sendgrid.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -81,7 +84,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
     }
 
     @Override
-    public ReservaEntidad reservar(ReservaDTO reservaDTO) {
+    public ReservaEntidad reservar(ReservaDTO reservaDTO) throws IOException {
 
         garantizarHotelExiste(reservaDTO.getIdHotel());
         garantizarTipoHabitacionExiste(reservaDTO.getIdTipoHabitacion());
@@ -124,6 +127,11 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         reservaEntidad.setIdentificacion(reservaDTO.getIdentificacion());
 
         reservaEntidad.setFechaRealizacion(LocalDateTime.now());
+
+        String mensaje = reservaEntidad.getNombres()+" "+reservaEntidad.getApellidos()+", "+"Su reserva está confirmada!";
+
+        EmailCliente.enviarCorreo("kevma.notificaciones@gmail.com",reservaEntidad.getCorreo(),"Confirmación de reserva",mensaje);
+
 
 
         return reservaRepositorio.save(reservaEntidad);

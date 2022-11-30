@@ -1,5 +1,6 @@
 package co.edu.uco.openresort.cliente;
 
+import co.edu.uco.openresort.excepcion.ExcepcionEmailNoEnviado;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -11,14 +12,18 @@ import com.sendgrid.helpers.mail.objects.Email;
 import java.io.IOException;
 
 public class EmailCliente {
+
+    private static final String MENSAJE_EMAIL_NO_ENVIADO = "No fue posible enviar el correo de confirmación, intente nuevamente";
+
+
     public static void enviarCorreo(String emisor,String receptor, String asunto, String mensaje) throws IOException {
         Email de = new Email(emisor);
         Email para = new Email(receptor);
 
-        Content contenido = new Content("text/html", mensaje);
+        Content contenido = new Content("text/plain", mensaje);
         Mail mail = new Mail(de,asunto,para,contenido);
 
-        SendGrid enviador = new SendGrid("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");
+        SendGrid enviador = new SendGrid(System.getenv("OPENRESORT_API_KEY"));
         Request peticion = new Request();
 
         try{
@@ -31,6 +36,11 @@ public class EmailCliente {
             System.out.println("codigo de respuesta: "+respuesta.getStatusCode());
             System.out.println("cuerpo de respuesta: "+respuesta.getBody());
             System.out.println("encabezado de respuesta: "+respuesta.getHeaders());
+
+            if (respuesta.getStatusCode()!=202){
+                throw new ExcepcionEmailNoEnviado(MENSAJE_EMAIL_NO_ENVIADO);
+            }
+
         } catch (IOException exception){
             throw exception;
         }
