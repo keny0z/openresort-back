@@ -1,5 +1,6 @@
 package co.edu.uco.openresort.cliente;
 
+import co.edu.uco.openresort.Credenciales;
 import co.edu.uco.openresort.excepcion.ExcepcionEmailNoEnviado;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -20,10 +21,10 @@ public class EmailCliente {
         Email de = new Email(emisor);
         Email para = new Email(receptor);
 
-        Content contenido = new Content("text/plain", mensaje);
+        Content contenido = new Content("text/html", mensaje);
         Mail mail = new Mail(de,asunto,para,contenido);
 
-        SendGrid enviador = new SendGrid(System.getenv("OPENRESORT_API_KEY"));
+        SendGrid enviador = new SendGrid(Credenciales.SENDGRID_API_KEY);
         Request peticion = new Request();
 
         try{

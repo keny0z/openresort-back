@@ -128,7 +128,37 @@ public class ReservaServicioImplementacion implements ReservaServicio {
 
         reservaEntidad.setFechaRealizacion(LocalDateTime.now());
 
-        String mensaje = reservaEntidad.getNombres()+" "+reservaEntidad.getApellidos()+", "+"Su reserva está confirmada!";
+        //String mensaje = reservaEntidad.getNombres()+" "+reservaEntidad.getApellidos()+", "+"Su reserva está confirmada!";
+        String mensaje = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "  <head>\n" +
+                "\n" +
+                "  </head>\n" +
+                "  <body>\n" +
+                "    <div>\n" +
+                "      <h1>Felicidades Kevin, tu reserva ha sido confirmada!</h1> \n" +
+                "    </div>\n" +
+                "\n" +
+                "    <div>\n" +
+                "      <h2>Detalles</h2>\n" +
+                "    </div>\n" +
+                "    \n" +
+                "    <div>\n" +
+                "      <b>Hotel:</b> Del Sol <br><br>\n" +
+                "      <b>Tipo de habitación:</b> Suite <br><br>\n" +
+                "      <b>Número de habitación:</b> 101 <br><br>\n" +
+                "      <b>Cantidad de adultos:</b> 2 <br><br>\n" +
+                "      <b>Cantidad de niños:</b> 0 <br><br>\n" +
+                "      <b>Fecha de llegada:</b> 11/12/2022 <br><br>\n" +
+                "      <b>Fecha de salida:</b> 17/12/2022 <br><br>\n" +
+                "    </div>\n" +
+                "\n" +
+                "    <footer>\n" +
+                "      <b>Fecha de realización de la reserva:</b> 30/11/2022\n" +
+                "    </footer>\n" +
+                "\n" +
+                "  </body>\n" +
+                "</html>";
 
         EmailCliente.enviarCorreo("kevma.notificaciones@gmail.com",reservaEntidad.getCorreo(),"Confirmación de reserva",mensaje);
 
