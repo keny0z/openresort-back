@@ -37,6 +37,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         CODIGOS_ESTADO.put(ExcepcionReservaCapacidadInsuficiente.class.getSimpleName(), HttpStatus.CONFLICT.value());
         CODIGOS_ESTADO.put(ExcepcionReservaSinDisponibilidad.class.getSimpleName(), HttpStatus.CONFLICT.value());
         CODIGOS_ESTADO.put(ExcepcionEmailNoEnviado.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+        CODIGOS_ESTADO.put(ExcepcionPlanNoExiste.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
 
     }
 

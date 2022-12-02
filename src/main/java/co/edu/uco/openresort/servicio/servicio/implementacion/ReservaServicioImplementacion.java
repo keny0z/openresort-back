@@ -4,13 +4,11 @@ import co.edu.uco.openresort.cliente.EmailCliente;
 import co.edu.uco.openresort.dto.DisponibilidadDTO;
 import co.edu.uco.openresort.dto.ReservaDTO;
 import co.edu.uco.openresort.entidad.HabitacionEntidad;
+import co.edu.uco.openresort.entidad.PlanEntidad;
 import co.edu.uco.openresort.entidad.ReservaEntidad;
 import co.edu.uco.openresort.entidad.TipoHabitacionEntidad;
 import co.edu.uco.openresort.excepcion.*;
-import co.edu.uco.openresort.repositorio.HabitacionRepositorio;
-import co.edu.uco.openresort.repositorio.HotelRepositorio;
-import co.edu.uco.openresort.repositorio.ReservaRepositorio;
-import co.edu.uco.openresort.repositorio.TipoHabitacionRepositorio;
+import co.edu.uco.openresort.repositorio.*;
 import co.edu.uco.openresort.servicio.servicio.ReservaServicio;
 import com.sendgrid.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
     private static final String MENSAJE_RESERVA_CAPACIDAD_INSUFICIENTE = "No existen habitaciones con capacidad suficiente";
     private static final String MENSAJE_RESERVA_HABITACIONES_NO_DISPONIBLES = "No hay disponibilidad de habitaciones para las fechas seleccionadas";
     private static final String MENSAJE_TIPO_HABITACION_NO_DISPONIBLE_EN_HOTEL = "El tipo de habitacion seleccionado no está disponible en el hotel seleccionado";
+    private static final String MENSAJE_PLAN_NO_EXISTE="El plan seleccionado no existe";
 
     @Autowired
     private ReservaRepositorio reservaRepositorio;
@@ -38,6 +37,8 @@ public class ReservaServicioImplementacion implements ReservaServicio {
     private HotelRepositorio hotelRepositorio;
     @Autowired
     private TipoHabitacionRepositorio tipoHabitacionRepositorio;
+    @Autowired
+    private PlanRepositorio planRepositorio;
 
 
     @Override
@@ -88,6 +89,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
 
         garantizarHotelExiste(reservaDTO.getIdHotel());
         garantizarTipoHabitacionExiste(reservaDTO.getIdTipoHabitacion());
+        garantizarPlanExiste(reservaDTO.getIdPlan());
 
         DisponibilidadDTO disponibilidadDTO = new DisponibilidadDTO();
 
@@ -109,9 +111,12 @@ public class ReservaServicioImplementacion implements ReservaServicio {
 
 
         ReservaEntidad reservaEntidad = new ReservaEntidad();
+        PlanEntidad planEntidad = new PlanEntidad();
+        reservaEntidad.setPlan(planEntidad);
 
         reservaEntidad.setHabitacion(habitacionesDisponiblesTipo.get(0));
         reservaEntidad.setNumeroHabitacion(reservaEntidad.getHabitacion().getNumero());
+        reservaEntidad.getPlan().setId(reservaDTO.getIdPlan());
 
         reservaEntidad.setAdultos(reservaDTO.getAdultos());
         reservaEntidad.setNinos(reservaDTO.getNinos());
@@ -239,6 +244,12 @@ public class ReservaServicioImplementacion implements ReservaServicio {
     private void garantizarTipoHabitacionExiste(int id){
         if(tipoHabitacionRepositorio.existsById(id)==false){
             throw new ExcepcionTipoHabitacionNoExiste(MENSAJE_TIPO_HABITACION_NO_EXISTE);
+        }
+    }
+
+    private void garantizarPlanExiste(int id){
+        if(planRepositorio.existsById(id)==false){
+            throw new ExcepcionPlanNoExiste(MENSAJE_PLAN_NO_EXISTE);
         }
     }
 
