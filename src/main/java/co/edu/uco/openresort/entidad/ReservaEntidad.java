@@ -16,6 +16,8 @@ public class ReservaEntidad {
     private int id;
     @ManyToOne
     private HabitacionEntidad habitacion;
+    @ManyToOne
+    private PlanEntidad plan;
     private LocalDateTime fechaLlegada;
     private LocalDateTime fechaSalida;
     private LocalDateTime fechaRealizacion;

@@ -15,6 +15,7 @@ public class ReservaEnsamblador {
         reservaDTO.setId(reservaEntidad.getId());
         reservaDTO.setIdHotel(reservaEntidad.getHabitacion().getHotel().getId());
         reservaDTO.setIdTipoHabitacion(reservaEntidad.getHabitacion().getTipo().getId());
+        reservaDTO.setIdPlan(reservaEntidad.getPlan().getId());
         reservaDTO.setFechaLlegada(reservaEntidad.getFechaLlegada());
         reservaDTO.setFechaSalida(reservaEntidad.getFechaSalida());
         reservaDTO.setFechaRealizacion(reservaEntidad.getFechaRealizacion());

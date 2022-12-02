@@ -13,6 +13,7 @@ public class ReservaDTO {
     private int id;
     private int idHotel;
     private int idTipoHabitacion;
+    private int idPlan;
     private LocalDateTime fechaLlegada;
     private LocalDateTime fechaSalida;
     private LocalDateTime fechaRealizacion;
