@@ -28,6 +28,7 @@ public class ReservaEnsamblador {
         reservaDTO.setPais(reservaEntidad.getPais());
         reservaDTO.setCelular(reservaEntidad.getCelular());
         reservaDTO.setIdentificacion(reservaEntidad.getIdentificacion());
+        reservaDTO.setCodigo(reservaEntidad.getCodigo());
 
         return reservaDTO;
     }

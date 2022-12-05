@@ -41,6 +41,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
     private PlanRepositorio planRepositorio;
 
 
+    //en la firma del metodo debe llegar un objeto Entidad y no un DTO
     @Override
     public ArrayList<HabitacionEntidad> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO) {
 
@@ -71,6 +72,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         return habitacionesDisponibles;
     }
 
+    //en la firma del metodo debe llegar un objeto Entidad y no un DTO
     @Override
     public ArrayList<TipoHabitacionEntidad> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO) {
         ArrayList<HabitacionEntidad> habitacionesDisponibles = consultarDisponibilidadHabitaciones(disponibilidadDTO);
@@ -84,6 +86,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         return tipoHabitaciones;
     }
 
+    //en la firma del metodo debe llegar un objeto Entidad y no un DTO
     @Override
     public ReservaEntidad reservar(ReservaDTO reservaDTO) throws IOException {
 
@@ -109,6 +112,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
             throw new ExcepcionHabitacionNoExiste(MENSAJE_TIPO_HABITACION_NO_DISPONIBLE_EN_HOTEL);
         }
 
+        //esto deberia estar en ReservaEnsamblador
 
         ReservaEntidad reservaEntidad = new ReservaEntidad();
         PlanEntidad planEntidad = new PlanEntidad();
@@ -131,6 +135,9 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         reservaEntidad.setCelular(reservaDTO.getCelular());
         reservaEntidad.setIdentificacion(reservaDTO.getIdentificacion());
 
+        //implementar una libreria para generar codigos hash a partir de la identificacion
+        reservaEntidad.setCodigo("or-"+reservaDTO.getIdentificacion());
+
         reservaEntidad.setFechaRealizacion(LocalDateTime.now());
 
         //String mensaje = reservaEntidad.getNombres()+" "+reservaEntidad.getApellidos()+", "+"Su reserva está confirmada!";
@@ -141,7 +148,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
                 "  </head>\n" +
                 "  <body>\n" +
                 "    <div>\n" +
-                "      <h1>Felicidades Kevin, tu reserva ha sido confirmada!</h1> \n" +
+                "      <h1>Felicidades " + reservaEntidad.getNombres() + ", tu reserva ha sido confirmada!</h1> \n" +
                 "    </div>\n" +
                 "\n" +
                 "    <div>\n" +
@@ -149,17 +156,18 @@ public class ReservaServicioImplementacion implements ReservaServicio {
                 "    </div>\n" +
                 "    \n" +
                 "    <div>\n" +
-                "      <b>Hotel:</b> Del Sol <br><br>\n" +
-                "      <b>Tipo de habitación:</b> Suite <br><br>\n" +
-                "      <b>Número de habitación:</b> 101 <br><br>\n" +
-                "      <b>Cantidad de adultos:</b> 2 <br><br>\n" +
-                "      <b>Cantidad de niños:</b> 0 <br><br>\n" +
-                "      <b>Fecha de llegada:</b> 11/12/2022 <br><br>\n" +
-                "      <b>Fecha de salida:</b> 17/12/2022 <br><br>\n" +
+                "      <b>Hotel:</b> " + reservaEntidad.getHabitacion().getHotel().getNombre() +
+                "      <b>Tipo de habitación:</b> " + reservaEntidad.getHabitacion().getTipo().getNombre() +
+                "      <b>Número de habitación:</b> " +reservaEntidad.getNumeroHabitacion() +
+                "      <b>Cantidad de adultos:</b> " +reservaEntidad.getAdultos() +
+                "      <b>Cantidad de niños:</b> " +reservaEntidad.getNinos() +
+                "      <b>Fecha de llegada:</b> "+reservaEntidad.getFechaLlegada() +
+                "      <b>Fecha de salida:</b> "+reservaEntidad.getFechaSalida() +
+                "      <b>Codigo:</b> "+ reservaEntidad.getCodigo() +
                 "    </div>\n" +
                 "\n" +
                 "    <footer>\n" +
-                "      <b>Fecha de realización de la reserva:</b> 30/11/2022\n" +
+                "      <b>Fecha de realización de la reserva:</b> "+ reservaEntidad.getFechaRealizacion() +
                 "    </footer>\n" +
                 "\n" +
                 "  </body>\n" +

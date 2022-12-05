@@ -26,5 +26,6 @@ public class ReservaDTO {
     private String pais;
     private String celular;
     private String identificacion;
+    private String codigo;
 
 }
