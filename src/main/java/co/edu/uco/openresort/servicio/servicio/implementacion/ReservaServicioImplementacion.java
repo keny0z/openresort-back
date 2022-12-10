@@ -134,6 +134,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         reservaEntidad.setPais(reservaDTO.getPais());
         reservaEntidad.setCelular(reservaDTO.getCelular());
         reservaEntidad.setIdentificacion(reservaDTO.getIdentificacion());
+        reservaEntidad.setFechaNacimiento(reservaDTO.getFechaNacimiento());
 
         //implementar una libreria para generar codigos hash a partir de la identificacion
         reservaEntidad.setCodigo("or-"+reservaDTO.getIdentificacion());

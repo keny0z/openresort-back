@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -30,5 +31,6 @@ public class ReservaEntidad {
     private String pais;
     private String celular;
     private String identificacion;
+    private LocalDate fechaNacimiento;
     private String codigo;
 }

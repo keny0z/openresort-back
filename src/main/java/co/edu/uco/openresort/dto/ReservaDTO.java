@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -26,6 +27,7 @@ public class ReservaDTO {
     private String pais;
     private String celular;
     private String identificacion;
+    private LocalDate fechaNacimiento;
     private String codigo;
 
 }
