@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HuespedRepositorio extends CrudRepository<HuespedEntidad,Integer> {
+    boolean existsByTag_Identificador(long identificador);
 }

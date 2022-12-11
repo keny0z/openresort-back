@@ -2,6 +2,7 @@ package co.edu.uco.openresort.servicio.servicio.implementacion;
 
 import co.edu.uco.openresort.entidad.HuespedEntidad;
 import co.edu.uco.openresort.excepcion.ExcepcionReservaNoExiste;
+import co.edu.uco.openresort.excepcion.ExcepcionTagNoDisponible;
 import co.edu.uco.openresort.excepcion.ExcepcionTagNoExiste;
 import co.edu.uco.openresort.repositorio.HuespedRepositorio;
 import co.edu.uco.openresort.repositorio.ReservaRepositorio;
@@ -17,6 +18,8 @@ public class HuespedServicioImplementacion implements HuespedServicio {
 
     private static final String MENSAJE_RESERVA_CODIGO_NO_EXISTE = "No existe ningina reserva asociada al código ingresado";
     private static final String MENSAJE_TAG_NO_EXISTE = "El tag ingresado no existe";
+    private static final String MENSAJE_TAG_NO_DISPONIBLE = "El tag ingresado ya se encuentra asociado a otro huésped, intente con otro";
+
 
 
 
@@ -37,6 +40,7 @@ public class HuespedServicioImplementacion implements HuespedServicio {
     public HuespedEntidad registrar(HuespedEntidad huespedEntidad) {
         garantizarReservaExistePorCodigo(huespedEntidad.getReserva().getCodigo());
         garantizarTagExiste(huespedEntidad.getTag().getIdentificador());
+        garantizarTagDisponible(huespedEntidad.getTag().getIdentificador());
 
         huespedEntidad.setReserva(reservaRepositorio.findByCodigo(huespedEntidad.getReserva().getCodigo()));
 
@@ -57,6 +61,12 @@ public class HuespedServicioImplementacion implements HuespedServicio {
     private void garantizarTagExiste(long identificador){
         if (tagRepositorio.existsById(identificador)==false){
             throw new ExcepcionTagNoExiste(MENSAJE_TAG_NO_EXISTE);
+        }
+    }
+
+    private void garantizarTagDisponible(long identificador){
+        if(huespedRepositorio.existsByTag_Identificador(identificador)){
+            throw new ExcepcionTagNoDisponible(MENSAJE_TAG_NO_DISPONIBLE);
         }
     }
 
