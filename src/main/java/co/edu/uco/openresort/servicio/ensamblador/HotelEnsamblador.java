@@ -12,6 +12,7 @@ public class HotelEnsamblador {
 
         hotelEntidad.setId(hotelDTO.getId());
         hotelEntidad.setNombre(hotelDTO.getNombre());
+        hotelEntidad.setPrecioNoche(hotelDTO.getPrecioNoche());
 
         return hotelEntidad;
     }
@@ -20,6 +21,7 @@ public class HotelEnsamblador {
 
         hotelDto.setId(hotelEntidad.getId());
         hotelDto.setNombre(hotelEntidad.getNombre());
+        hotelDto.setPrecioNoche(hotelEntidad.getPrecioNoche());
 
         return hotelDto;
     }
