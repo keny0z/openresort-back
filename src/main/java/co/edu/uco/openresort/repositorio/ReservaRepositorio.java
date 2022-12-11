@@ -10,4 +10,6 @@ import java.util.ArrayList;
 public interface ReservaRepositorio extends CrudRepository<ReservaEntidad,Integer> {
 
     ArrayList<ReservaEntidad> findByHabitacion_Id(int id);
+    boolean existsByCodigo(String codigo);
+    ReservaEntidad findByCodigo(String codigo);
 }
