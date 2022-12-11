@@ -20,8 +20,6 @@ public class TipoHabitacionEntidad {
     private int capacidadAdultos;
     @Column(name="cap_ninos")
     private int capacidadNinos;
-    @Column(name="pre_sol")
-    private BigDecimal precioDiaSol;
     @Column(name="pre_nch")
     private BigDecimal precioNoche;
 

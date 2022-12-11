@@ -12,6 +12,5 @@ public class TipoHabitacionDTO {
     private String descripcion;
     private int capacidadAdultos;
     private int capacidadNinos;
-    private BigDecimal precioDiaSol;
     private BigDecimal precioNoche;
 }

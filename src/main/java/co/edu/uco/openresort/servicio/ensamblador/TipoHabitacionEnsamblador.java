@@ -15,7 +15,6 @@ public class TipoHabitacionEnsamblador {
         tipoHabitacionEntidad.setDescripcion(tipoHabitacionDTO.getDescripcion());
         tipoHabitacionEntidad.setCapacidadAdultos(tipoHabitacionDTO.getCapacidadAdultos());
         tipoHabitacionEntidad.setCapacidadNinos(tipoHabitacionDTO.getCapacidadNinos());
-        tipoHabitacionEntidad.setPrecioDiaSol(tipoHabitacionDTO.getPrecioDiaSol());
         tipoHabitacionEntidad.setPrecioNoche(tipoHabitacionDTO.getPrecioNoche());
 
         return tipoHabitacionEntidad;
@@ -28,7 +27,6 @@ public class TipoHabitacionEnsamblador {
         tipoHabitacionDto.setDescripcion(tipoHabitacionEntidad.getDescripcion());
         tipoHabitacionDto.setCapacidadAdultos(tipoHabitacionEntidad.getCapacidadAdultos());
         tipoHabitacionDto.setCapacidadNinos(tipoHabitacionEntidad.getCapacidadNinos());
-        tipoHabitacionDto.setPrecioDiaSol(tipoHabitacionEntidad.getPrecioDiaSol());
         tipoHabitacionDto.setPrecioNoche(tipoHabitacionEntidad.getPrecioNoche());
 
         return tipoHabitacionDto;
