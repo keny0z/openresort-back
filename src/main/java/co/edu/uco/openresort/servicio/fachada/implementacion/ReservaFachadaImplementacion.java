@@ -38,4 +38,9 @@ public class ReservaFachadaImplementacion implements ReservaFachada {
     public ArrayList<ReservaDTO> consultar() {
         return ReservaEnsamblador.ensamblarListaDTO(reservaServicio.consultar());
     }
+
+    @Override
+    public ArrayList<ConsultaDisponibilidadDTO> obtenerListaDisponibilidad(DisponibilidadDTO disponibilidadDTO) {
+        return reservaServicio.obtenerListaDisponibilidad(disponibilidadDTO);
+    }
 }

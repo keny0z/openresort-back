@@ -1,7 +1,9 @@
 package co.edu.uco.openresort.servicio.servicio.implementacion;
 
 import co.edu.uco.openresort.cliente.EmailCliente;
+import co.edu.uco.openresort.dto.ConsultaDisponibilidadPlanDTO;
 import co.edu.uco.openresort.dto.DisponibilidadDTO;
+import co.edu.uco.openresort.dto.ConsultaDisponibilidadDTO;
 import co.edu.uco.openresort.dto.ReservaDTO;
 import co.edu.uco.openresort.entidad.HabitacionEntidad;
 import co.edu.uco.openresort.entidad.PlanEntidad;
@@ -10,11 +12,11 @@ import co.edu.uco.openresort.entidad.TipoHabitacionEntidad;
 import co.edu.uco.openresort.excepcion.*;
 import co.edu.uco.openresort.repositorio.*;
 import co.edu.uco.openresort.servicio.servicio.ReservaServicio;
-import com.sendgrid.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -260,6 +262,52 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         if(planRepositorio.existsById(id)==false){
             throw new ExcepcionPlanNoExiste(MENSAJE_PLAN_NO_EXISTE);
         }
+    }
+
+    @Override
+    public ArrayList<ConsultaDisponibilidadDTO> obtenerListaDisponibilidad(DisponibilidadDTO disponibilidadDTO){
+
+        ArrayList<ConsultaDisponibilidadDTO> listaDisponibilidad = new ArrayList<>();
+
+        ArrayList<TipoHabitacionEntidad> tipoHabitacionesDisponibles = consultarDisponibilidadTipoHabitacion(disponibilidadDTO);
+
+        for(TipoHabitacionEntidad tipoHabitacionEntidad : tipoHabitacionesDisponibles){
+            ConsultaDisponibilidadDTO consultaDisponibilidadDTO = new ConsultaDisponibilidadDTO();
+
+            consultaDisponibilidadDTO.setIdTipoHabitacion(tipoHabitacionEntidad.getId());
+            consultaDisponibilidadDTO.setNombre(tipoHabitacionEntidad.getNombre());
+            consultaDisponibilidadDTO.setDescripcion(tipoHabitacionEntidad.getDescripcion());
+            consultaDisponibilidadDTO.setCapacidadAdultos(tipoHabitacionEntidad.getCapacidadAdultos());
+            consultaDisponibilidadDTO.setCapacidadNinos(tipoHabitacionEntidad.getCapacidadNinos());
+
+            consultaDisponibilidadDTO.setPlanes(setearPlanesConPrecio(tipoHabitacionEntidad,disponibilidadDTO));
+
+            listaDisponibilidad.add(consultaDisponibilidadDTO);
+        }
+
+        return listaDisponibilidad;
+    }
+
+    private ArrayList<ConsultaDisponibilidadPlanDTO> setearPlanesConPrecio(TipoHabitacionEntidad tipoHabitacionEntidad, DisponibilidadDTO disponibilidadDTO){
+        ArrayList<ConsultaDisponibilidadPlanDTO> planesConPrecio = new ArrayList<>();
+        ArrayList<PlanEntidad> planesExistentes = (ArrayList<PlanEntidad>) planRepositorio.findAll();
+
+        for(PlanEntidad planEntidad:planesExistentes){
+            ConsultaDisponibilidadPlanDTO consultaDisponibilidadPlanDTO = new ConsultaDisponibilidadPlanDTO();
+
+            consultaDisponibilidadPlanDTO.setIdPlan(planEntidad.getId());
+            consultaDisponibilidadPlanDTO.setNombre(planEntidad.getNombre());
+            consultaDisponibilidadPlanDTO.setDescripcion(planEntidad.getDescripcion());
+            consultaDisponibilidadPlanDTO.setPrecioTotal(calcularPrecioTotal(tipoHabitacionEntidad, disponibilidadDTO));
+
+            planesConPrecio.add(consultaDisponibilidadPlanDTO);
+
+        }
+        return planesConPrecio;
+    }
+
+    private BigDecimal calcularPrecioTotal(TipoHabitacionEntidad tipoHabitacionEntidad, DisponibilidadDTO disponibilidadDTO){
+        return new BigDecimal(100);
     }
 
 

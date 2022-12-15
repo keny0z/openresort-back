@@ -25,6 +25,11 @@ public class ReservaControlador {
         return reservaFachada.consultarDisponibilidadTipoHabitacion(disponibilidadDTO);
     }
 
+    @PostMapping("/disponibilidad")
+    public ArrayList<ConsultaDisponibilidadDTO> consultarDisponibilidad(@RequestBody DisponibilidadDTO disponibilidadDTO){
+        return reservaFachada.obtenerListaDisponibilidad(disponibilidadDTO);
+    }
+
     @PostMapping
     public ReservaDTO reservar(@RequestBody ReservaDTO reservaDTO) throws IOException {
         return reservaFachada.reservar(reservaDTO);

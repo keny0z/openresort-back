@@ -1,5 +1,6 @@
 package co.edu.uco.openresort.servicio.servicio;
 
+import co.edu.uco.openresort.dto.ConsultaDisponibilidadDTO;
 import co.edu.uco.openresort.dto.DisponibilidadDTO;
 import co.edu.uco.openresort.dto.ReservaDTO;
 import co.edu.uco.openresort.entidad.HabitacionEntidad;
@@ -17,4 +18,6 @@ public interface ReservaServicio {
     ReservaEntidad reservar(ReservaDTO reservaDTO) throws IOException;
 
     ArrayList<ReservaEntidad> consultar();
+
+    ArrayList<ConsultaDisponibilidadDTO> obtenerListaDisponibilidad(DisponibilidadDTO disponibilidadDTO);
 }

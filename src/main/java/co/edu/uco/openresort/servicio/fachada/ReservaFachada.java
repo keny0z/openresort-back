@@ -10,5 +10,6 @@ public interface ReservaFachada {
     ArrayList<TipoHabitacionDTO> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO);
     ReservaDTO reservar(ReservaDTO reservaDTO) throws IOException;
     ArrayList<ReservaDTO> consultar();
+    ArrayList<ConsultaDisponibilidadDTO> obtenerListaDisponibilidad(DisponibilidadDTO disponibilidadDTO);
 
 }
