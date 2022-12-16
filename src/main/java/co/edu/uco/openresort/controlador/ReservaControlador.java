@@ -16,17 +16,17 @@ public class ReservaControlador {
     private ReservaFachada reservaFachada;
 
     @PostMapping("/disponibilidad/habitacion")
-    public ArrayList<HabitacionDTO> consultarDisponibilidadHabitaciones(@RequestBody DisponibilidadDTO disponibilidadDTO){
+    public ArrayList<HabitacionDTO> consultarDisponibilidadHabitaciones(@RequestBody ConsultaDisponibilidadDTO disponibilidadDTO){
         return reservaFachada.consultarDisponibilidadHabitaciones(disponibilidadDTO);
     }
 
     @PostMapping("/disponibilidad/tipo")
-    public ArrayList<TipoHabitacionDTO> consultarDisponibilidadTipoHabitacion(@RequestBody DisponibilidadDTO disponibilidadDTO){
+    public ArrayList<TipoHabitacionDTO> consultarDisponibilidadTipoHabitacion(@RequestBody ConsultaDisponibilidadDTO disponibilidadDTO){
         return reservaFachada.consultarDisponibilidadTipoHabitacion(disponibilidadDTO);
     }
 
     @PostMapping("/disponibilidad")
-    public ArrayList<ConsultaDisponibilidadDTO> consultarDisponibilidad(@RequestBody DisponibilidadDTO disponibilidadDTO){
+    public ArrayList<RespuestaDisponibilidadDTO> consultarDisponibilidad(@RequestBody ConsultaDisponibilidadDTO disponibilidadDTO){
         return reservaFachada.obtenerListaDisponibilidad(disponibilidadDTO);
     }
 

@@ -1,9 +1,9 @@
 package co.edu.uco.openresort.servicio.servicio.implementacion;
 
 import co.edu.uco.openresort.cliente.EmailCliente;
-import co.edu.uco.openresort.dto.ConsultaDisponibilidadPlanDTO;
-import co.edu.uco.openresort.dto.DisponibilidadDTO;
+import co.edu.uco.openresort.dto.RespuestaDisponibilidadPlanDTO;
 import co.edu.uco.openresort.dto.ConsultaDisponibilidadDTO;
+import co.edu.uco.openresort.dto.RespuestaDisponibilidadDTO;
 import co.edu.uco.openresort.dto.ReservaDTO;
 import co.edu.uco.openresort.entidad.HabitacionEntidad;
 import co.edu.uco.openresort.entidad.PlanEntidad;
@@ -45,7 +45,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
 
     //en la firma del metodo debe llegar un objeto Entidad y no un DTO
     @Override
-    public ArrayList<HabitacionEntidad> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO) {
+    public ArrayList<HabitacionEntidad> consultarDisponibilidadHabitaciones(ConsultaDisponibilidadDTO disponibilidadDTO) {
 
         garantizarHotelExiste(disponibilidadDTO.getIdHotel());
 
@@ -76,7 +76,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
 
     //en la firma del metodo debe llegar un objeto Entidad y no un DTO
     @Override
-    public ArrayList<TipoHabitacionEntidad> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO) {
+    public ArrayList<TipoHabitacionEntidad> consultarDisponibilidadTipoHabitacion(ConsultaDisponibilidadDTO disponibilidadDTO) {
         ArrayList<HabitacionEntidad> habitacionesDisponibles = consultarDisponibilidadHabitaciones(disponibilidadDTO);
         ArrayList<TipoHabitacionEntidad> tipoHabitaciones = new ArrayList<>();
         for (HabitacionEntidad habitacionEntidad:habitacionesDisponibles) {
@@ -96,7 +96,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         garantizarTipoHabitacionExiste(reservaDTO.getIdTipoHabitacion());
         garantizarPlanExiste(reservaDTO.getIdPlan());
 
-        DisponibilidadDTO disponibilidadDTO = new DisponibilidadDTO();
+        ConsultaDisponibilidadDTO disponibilidadDTO = new ConsultaDisponibilidadDTO();
 
         disponibilidadDTO.setIdHotel(reservaDTO.getIdHotel());
         disponibilidadDTO.setFechaLLegada(reservaDTO.getFechaLlegada());
@@ -265,14 +265,14 @@ public class ReservaServicioImplementacion implements ReservaServicio {
     }
 
     @Override
-    public ArrayList<ConsultaDisponibilidadDTO> obtenerListaDisponibilidad(DisponibilidadDTO disponibilidadDTO){
+    public ArrayList<RespuestaDisponibilidadDTO> obtenerListaDisponibilidad(ConsultaDisponibilidadDTO disponibilidadDTO){
 
-        ArrayList<ConsultaDisponibilidadDTO> listaDisponibilidad = new ArrayList<>();
+        ArrayList<RespuestaDisponibilidadDTO> listaDisponibilidad = new ArrayList<>();
 
         ArrayList<TipoHabitacionEntidad> tipoHabitacionesDisponibles = consultarDisponibilidadTipoHabitacion(disponibilidadDTO);
 
         for(TipoHabitacionEntidad tipoHabitacionEntidad : tipoHabitacionesDisponibles){
-            ConsultaDisponibilidadDTO consultaDisponibilidadDTO = new ConsultaDisponibilidadDTO();
+            RespuestaDisponibilidadDTO consultaDisponibilidadDTO = new RespuestaDisponibilidadDTO();
 
             consultaDisponibilidadDTO.setConsulta(disponibilidadDTO);
             consultaDisponibilidadDTO.setIdTipoHabitacion(tipoHabitacionEntidad.getId());
@@ -289,12 +289,12 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         return listaDisponibilidad;
     }
 
-    private ArrayList<ConsultaDisponibilidadPlanDTO> setearPlanesConPrecio(TipoHabitacionEntidad tipoHabitacionEntidad, DisponibilidadDTO disponibilidadDTO){
-        ArrayList<ConsultaDisponibilidadPlanDTO> planesConPrecio = new ArrayList<>();
+    private ArrayList<RespuestaDisponibilidadPlanDTO> setearPlanesConPrecio(TipoHabitacionEntidad tipoHabitacionEntidad, ConsultaDisponibilidadDTO disponibilidadDTO){
+        ArrayList<RespuestaDisponibilidadPlanDTO> planesConPrecio = new ArrayList<>();
         ArrayList<PlanEntidad> planesExistentes = (ArrayList<PlanEntidad>) planRepositorio.findAll();
 
         for(PlanEntidad planEntidad:planesExistentes){
-            ConsultaDisponibilidadPlanDTO consultaDisponibilidadPlanDTO = new ConsultaDisponibilidadPlanDTO();
+            RespuestaDisponibilidadPlanDTO consultaDisponibilidadPlanDTO = new RespuestaDisponibilidadPlanDTO();
 
             consultaDisponibilidadPlanDTO.setIdPlan(planEntidad.getId());
             consultaDisponibilidadPlanDTO.setNombre(planEntidad.getNombre());
@@ -307,7 +307,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         return planesConPrecio;
     }
 
-    private BigDecimal calcularPrecioTotal(TipoHabitacionEntidad tipoHabitacionEntidad, DisponibilidadDTO disponibilidadDTO){
+    private BigDecimal calcularPrecioTotal(TipoHabitacionEntidad tipoHabitacionEntidad, ConsultaDisponibilidadDTO disponibilidadDTO){
         return new BigDecimal(100);
     }
 

@@ -19,13 +19,13 @@ public class ReservaFachadaImplementacion implements ReservaFachada {
     ReservaServicio reservaServicio;
 
     @Override
-    public ArrayList<HabitacionDTO> consultarDisponibilidadHabitaciones(DisponibilidadDTO disponibilidadDTO) {
+    public ArrayList<HabitacionDTO> consultarDisponibilidadHabitaciones(ConsultaDisponibilidadDTO disponibilidadDTO) {
         return HabitacionEnsamblador.ensamblarListaDTO(reservaServicio.consultarDisponibilidadHabitaciones(disponibilidadDTO));
 
     }
 
     @Override
-    public ArrayList<TipoHabitacionDTO> consultarDisponibilidadTipoHabitacion(DisponibilidadDTO disponibilidadDTO) {
+    public ArrayList<TipoHabitacionDTO> consultarDisponibilidadTipoHabitacion(ConsultaDisponibilidadDTO disponibilidadDTO) {
         return TipoHabitacionEnsamblador.ensamblarListaDTO(reservaServicio.consultarDisponibilidadTipoHabitacion(disponibilidadDTO));
     }
 
@@ -40,7 +40,7 @@ public class ReservaFachadaImplementacion implements ReservaFachada {
     }
 
     @Override
-    public ArrayList<ConsultaDisponibilidadDTO> obtenerListaDisponibilidad(DisponibilidadDTO disponibilidadDTO) {
+    public ArrayList<RespuestaDisponibilidadDTO> obtenerListaDisponibilidad(ConsultaDisponibilidadDTO disponibilidadDTO) {
         return reservaServicio.obtenerListaDisponibilidad(disponibilidadDTO);
     }
 }

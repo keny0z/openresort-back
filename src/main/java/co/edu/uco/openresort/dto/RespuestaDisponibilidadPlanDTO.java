@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class ConsultaDisponibilidadPlanDTO {
+public class RespuestaDisponibilidadPlanDTO {
     private int idPlan;
     private String nombre;
     private String descripcion;
