@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class ConsultaDisponibilidadDTO {
 
     //falta agregar fechaLlegada, fechaSalida, adultos y ninos para poder consumir la reserva facil desde el front
+    private DisponibilidadDTO consulta;
     private int idTipoHabitacion;
     private String nombre;
     private String descripcion;

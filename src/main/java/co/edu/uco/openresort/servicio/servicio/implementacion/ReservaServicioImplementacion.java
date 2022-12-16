@@ -274,6 +274,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         for(TipoHabitacionEntidad tipoHabitacionEntidad : tipoHabitacionesDisponibles){
             ConsultaDisponibilidadDTO consultaDisponibilidadDTO = new ConsultaDisponibilidadDTO();
 
+            consultaDisponibilidadDTO.setConsulta(disponibilidadDTO);
             consultaDisponibilidadDTO.setIdTipoHabitacion(tipoHabitacionEntidad.getId());
             consultaDisponibilidadDTO.setNombre(tipoHabitacionEntidad.getNombre());
             consultaDisponibilidadDTO.setDescripcion(tipoHabitacionEntidad.getDescripcion());
