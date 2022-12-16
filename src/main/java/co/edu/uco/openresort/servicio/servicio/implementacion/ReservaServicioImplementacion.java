@@ -65,7 +65,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         }
 
         //3. filtrar las habitaciones que tienen disponibilidad
-        ArrayList<HabitacionEntidad> habitacionesDisponibles = buscarHabitacionesDisponibles(disponibilidadDTO.getFechaLLegada(),disponibilidadDTO.getFechaSalida(),habitacionesConCapacidad);
+        ArrayList<HabitacionEntidad> habitacionesDisponibles = buscarHabitacionesDisponibles(disponibilidadDTO.getFechaLlegada(),disponibilidadDTO.getFechaSalida(),habitacionesConCapacidad);
 
         if(habitacionesDisponibles.size()==0){
             throw new ExcepcionReservaSinDisponibilidad(MENSAJE_RESERVA_HABITACIONES_NO_DISPONIBLES);
@@ -99,7 +99,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         ConsultaDisponibilidadDTO disponibilidadDTO = new ConsultaDisponibilidadDTO();
 
         disponibilidadDTO.setIdHotel(reservaDTO.getIdHotel());
-        disponibilidadDTO.setFechaLLegada(reservaDTO.getFechaLlegada());
+        disponibilidadDTO.setFechaLlegada(reservaDTO.getFechaLlegada());
         disponibilidadDTO.setFechaSalida(reservaDTO.getFechaSalida());
         disponibilidadDTO.setAdultos(reservaDTO.getAdultos());
         disponibilidadDTO.setNinos(reservaDTO.getNinos());

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Setter
 public class ConsultaDisponibilidadDTO {
     private int idHotel;
-    private LocalDateTime fechaLLegada;
+    private LocalDateTime fechaLlegada;
     private LocalDateTime fechaSalida;
     private int adultos;
     private int ninos;
