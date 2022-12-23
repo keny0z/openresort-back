@@ -128,6 +128,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         reservaEntidad.setNinos(reservaDTO.getNinos());
         reservaEntidad.setFechaLlegada(reservaDTO.getFechaLlegada());
         reservaEntidad.setFechaSalida(reservaDTO.getFechaSalida());
+        reservaEntidad.setFechaRealizacion(LocalDateTime.now());
 
 
         reservaEntidad.setNombres(reservaDTO.getNombres());
@@ -141,7 +142,7 @@ public class ReservaServicioImplementacion implements ReservaServicio {
         //implementar una libreria para generar codigos hash a partir de la identificacion
         reservaEntidad.setCodigo("or-"+reservaDTO.getIdentificacion());
 
-        reservaEntidad.setFechaRealizacion(LocalDateTime.now());
+        reservaEntidad.setPrecioTotal(calcularPrecioTotal(reservaEntidad.getHabitacion().getTipo(),disponibilidadDTO));
 
         //String mensaje = reservaEntidad.getNombres()+" "+reservaEntidad.getApellidos()+", "+"Su reserva está confirmada!";
         String mensaje = "<!DOCTYPE html>\n" +
@@ -160,13 +161,22 @@ public class ReservaServicioImplementacion implements ReservaServicio {
                 "    \n" +
                 "    <div>\n" +
                 "      <b>Hotel:</b> " + reservaEntidad.getHabitacion().getHotel().getNombre() +
+                "<br>" +
                 "      <b>Tipo de habitación:</b> " + reservaEntidad.getHabitacion().getTipo().getNombre() +
+                "<br>" +
                 "      <b>Número de habitación:</b> " +reservaEntidad.getNumeroHabitacion() +
+                "<br>" +
                 "      <b>Cantidad de adultos:</b> " +reservaEntidad.getAdultos() +
+                "<br>" +
                 "      <b>Cantidad de niños:</b> " +reservaEntidad.getNinos() +
+                "<br>" +
                 "      <b>Fecha de llegada:</b> "+reservaEntidad.getFechaLlegada() +
+                "<br>" +
                 "      <b>Fecha de salida:</b> "+reservaEntidad.getFechaSalida() +
+                "<br>" +
                 "      <b>Codigo:</b> "+ reservaEntidad.getCodigo() +
+                "<br>" +
+                "      <b>Precio total:</b> "+ reservaEntidad.getPrecioTotal() +
                 "    </div>\n" +
                 "\n" +
                 "    <footer>\n" +

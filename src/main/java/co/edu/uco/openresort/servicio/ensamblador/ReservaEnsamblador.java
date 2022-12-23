@@ -30,6 +30,7 @@ public class ReservaEnsamblador {
         reservaDTO.setIdentificacion(reservaEntidad.getIdentificacion());
         reservaDTO.setFechaNacimiento(reservaEntidad.getFechaNacimiento());
         reservaDTO.setCodigo(reservaEntidad.getCodigo());
+        reservaDTO.setPrecioTotal(reservaEntidad.getPrecioTotal());
 
         return reservaDTO;
     }
